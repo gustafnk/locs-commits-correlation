@@ -23,10 +23,12 @@ var sumForProperty = function(property){
 };
 var locSum = sumForProperty("loc");
 	
-
-metrics.forEach(function(item){ 
-	item.locPercent = item.loc/locSum;
-});
+var writePercentForProperty = function(property, sum){
+	metrics.forEach(function(item){ 
+		item[property + "Percent"] = item[property]/sum;
+	});
+};
+writePercentForProperty("loc", locSum);
 
 var sum = 0;
 metrics.forEach(function(item){
