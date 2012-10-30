@@ -1,3 +1,10 @@
+var jade = require('jade'),
+	fs = require('fs');
+
+var template = fs.readFileSync("template.jade", 'utf8');
+
+var fn = jade.compile(template);
+
 
 var metrics = [
 	{loc: 1, commits: 2},
@@ -44,6 +51,7 @@ writeAccumulatedSumForProperty("locPercent");
 writeAccumulatedSumForProperty("commitsPercent");
 
 // Print the result matrix
+/*
 metrics.forEach(function(item){
 	console.log(
 		"LOC: ", item.loc, "; Commits: ", item.commits, 
@@ -51,6 +59,7 @@ metrics.forEach(function(item){
 		"; CommitPercent: ", item.commitsPercent, "; CommitPercentAccSum: ", item.commitsPercentAccSum
 	);
 });
+*/
 
 var filesPercent = metrics.map(function(){
 	return 1/metrics.length;
@@ -66,8 +75,11 @@ var returnAccumulatedSum = function(list){
 
 var filesPercentAccSum = returnAccumulatedSum(filesPercent)
 
-console.log();
-console.log("LOC sum:", locSum);
-console.log("Commit sum:", commitSum);
+//console.log();
+//console.log("LOC sum:", locSum);
+//console.log("Commit sum:", commitSum);
 
 //console.log(filesPercentAccSum);
+
+var str = fn({metrics: metrics});
+console.log(str);
