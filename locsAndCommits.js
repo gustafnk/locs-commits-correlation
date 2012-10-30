@@ -52,6 +52,22 @@ metrics.forEach(function(item){
 	);
 });
 
+var filesPercent = metrics.map(function(){
+	return 1/metrics.length;
+});
+
+var returnAccumulatedSum = function(list){
+	var sum = 0;
+	return list.map(function(item){
+		sum += item; 
+		return sum;
+	});
+};
+
+var filesPercentAccSum = returnAccumulatedSum(filesPercent)
+
 console.log();
 console.log("LOC sum:", locSum);
 console.log("Commit sum:", commitSum);
+
+//console.log(filesPercentAccSum);
