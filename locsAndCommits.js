@@ -22,13 +22,15 @@ var sumForProperty = function(property){
 	});
 };
 var locSum = sumForProperty("loc");
-	
+var commitSum = sumForProperty("commits");	
+
 var writePercentForProperty = function(property, sum){
 	metrics.forEach(function(item){ 
 		item[property + "Percent"] = item[property]/sum;
 	});
 };
 writePercentForProperty("loc", locSum);
+writePercentForProperty("commits", commitSum);
 
 var writeAccumulatedSumForProperty = function(property){
 	var sum = 0;
@@ -38,14 +40,17 @@ var writeAccumulatedSumForProperty = function(property){
 	});
 };
 writeAccumulatedSumForProperty("loc");
+writeAccumulatedSumForProperty("commits");
 
 // Print the result matrix
 metrics.forEach(function(item){
 	console.log(
 		"LOC: ", item.loc, "; Commits: ", item.commits, 
-		"; LOCPercent: ", item.locPercent, "; LOCAccSum: ", item.locAccSum
+		"; LOCPercent: ", item.locPercent, "; LOCAccSum: ", item.locAccSum,
+		"; CommitPercent: ", item.commitsPercent, "; CommitAccSum: ", item.commitsAccSum
 	);
 });
 
 console.log();
 console.log("LOC sum:", locSum);
+console.log("Commit sum:", commitSum);
