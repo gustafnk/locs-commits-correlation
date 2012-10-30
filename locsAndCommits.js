@@ -39,15 +39,16 @@ var writeAccumulatedSumForProperty = function(property){
 		item[property + "AccSum"] = sum;
 	});
 };
-writeAccumulatedSumForProperty("loc");
-writeAccumulatedSumForProperty("commits");
+
+writeAccumulatedSumForProperty("locPercent");
+writeAccumulatedSumForProperty("commitsPercent");
 
 // Print the result matrix
 metrics.forEach(function(item){
 	console.log(
 		"LOC: ", item.loc, "; Commits: ", item.commits, 
-		"; LOCPercent: ", item.locPercent, "; LOCAccSum: ", item.locAccSum,
-		"; CommitPercent: ", item.commitsPercent, "; CommitAccSum: ", item.commitsAccSum
+		"; LOCPercent: ", item.locPercent, "; LOCPercentAccSum: ", item.locPercentAccSum,
+		"; CommitPercent: ", item.commitsPercent, "; CommitPercentAccSum: ", item.commitsPercentAccSum
 	);
 });
 
