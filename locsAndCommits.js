@@ -14,11 +14,15 @@ var metrics = [
 
 // TODO filter out loc === 0 or commits === 0
 
-var locSum = metrics.map(function(item){
-	return item.loc;
-}).reduce(function(m,n){
-	return m+n;
-});
+var sumForProperty = function(property){
+	return metrics.map(function(item){
+		return item[property];
+	}).reduce(function(m,n){
+		return m+n;
+	});
+};
+var locSum = sumForProperty("loc");
+	
 
 metrics.forEach(function(item){ 
 	item.locPercent = item.loc/locSum;
