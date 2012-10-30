@@ -30,15 +30,21 @@ var writePercentForProperty = function(property, sum){
 };
 writePercentForProperty("loc", locSum);
 
-var sum = 0;
-metrics.forEach(function(item){
-	sum += item.loc; 
-	item.locAccSum = sum;
-});
+var writeAccumulatedSumForProperty = function(property){
+	var sum = 0;
+	metrics.forEach(function(item){
+		sum += item[property]; 
+		item[property + "AccSum"] = sum;
+	});
+};
+writeAccumulatedSumForProperty("loc");
 
 // Print the result matrix
 metrics.forEach(function(item){
-	console.log("LOC: ", item.loc, "; Commits: ", item.commits, "; LOCPercent: ", item.locPercent, "; LOCAccSum: ", item.locAccSum);
+	console.log(
+		"LOC: ", item.loc, "; Commits: ", item.commits, 
+		"; LOCPercent: ", item.locPercent, "; LOCAccSum: ", item.locAccSum
+	);
 });
 
 console.log();
