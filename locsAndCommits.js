@@ -2,9 +2,7 @@ var jade = require('jade'),
 	fs = require('fs');
 
 var template = fs.readFileSync("template.jade", 'utf8');
-
 var fn = jade.compile(template);
-
 
 var metrics = [
 	{loc: 1, commits: 2},
@@ -19,7 +17,10 @@ var metrics = [
 	{loc: 10, commits: 20}
 ];
 
+// TODO Remove first input line
 // TODO filter out loc === 0 or commits === 0
+// TODO Add graphics/charts
+// TODO Add some tests
 
 var sumForProperty = function(property){
 	return metrics.map(function(item){
