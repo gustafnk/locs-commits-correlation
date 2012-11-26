@@ -2,7 +2,7 @@ var jade = require('jade'),
     fs = require('fs'),
     $_ = require('underscore');
 
-var data = fs.readFileSync("tmp.txt", 'utf8');
+var data = fs.readFileSync("tmp", 'utf8');
 var lines = data.split("\n");
 
 var metricsNotSorted =
