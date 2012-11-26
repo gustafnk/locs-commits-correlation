@@ -1,21 +1,18 @@
-html
-    head
-        link(href='style.css', rel='stylesheet', type='text/css')
-    body
-        h1 Metrics
-        table(class='full')
-            tr
-                th Loc
-                th Commits
-                th LocPercent
-                th LocPercentAccSum
-                th CommitsPercent
-                th CommitsPercentAccSum
-            each item in metrics
-                tr
-                    td(class='loc')= item.loc
-                    td(class='commits')= item.commits
-                    td(class='locPercent')= item.locPercent
-                    td(class='locPercentAccSum')= item.locPercentAccSum
-                    td(class='commitsPercent')= item.commitsPercent
-                    td(class='commitsPercentAccSum')= item.commitsPercentAccSum
+hr
+h1 Percent and sums
+table(class='full')
+    tr
+        th Loc
+        th Commits
+        th LocPercent
+        th LocPercentAccSum
+        th CommitsPercent
+        th CommitsPercentAccSum
+    each item in metrics
+        tr
+            td(class='loc')= item.loc
+            td(class='commits')= item.commits
+            td(class='locPercent')= item.locPercent
+            td(class='locPercentAccSum')= item.locPercentAccSum
+            td(class='commitsPercent')= item.commitsPercent
+            td(class='commitsPercentAccSum')= item.commitsPercentAccSum

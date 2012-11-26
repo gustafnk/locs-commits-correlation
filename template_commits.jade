@@ -1,11 +1,8 @@
-html
-    head
-        link(href='style.css', rel='stylesheet', type='text/css')
-    body
-        h1 Commits
-        table(class='commits')
-            tr
-                th Commits
-            each item in metrics
-                tr
-                    td(class='commits')= item.commits
+hr
+h1 Commits
+table(class='commits')
+    tr
+        th Commits
+    each item in metrics
+        tr
+            td(class='commits')= item.commits

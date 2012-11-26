@@ -1,11 +1,8 @@
-html
-    head
-        link(href='style.css', rel='stylesheet', type='text/css')
-    body
-        h1 Locs
-        table(class='locs')
-            tr
-                th Loc
-            each item in metrics
-                tr
-                    td(class='loc')= item.loc
+hr
+h1 Locs
+table(class='locs')
+    tr
+        th Loc
+    each item in metrics
+        tr
+            td(class='loc')= item.loc
