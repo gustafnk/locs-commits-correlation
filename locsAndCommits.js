@@ -1,24 +1,26 @@
 var jade = require('jade'),
-	fs = require('fs');
+	fs = require('fs'),
+	$_ = require('underscore');
+
+var data = fs.readFileSync("tmp.txt", 'utf8');
+var lines = data.split("\n");
+
+var metrics =
+	$_.chain(lines)
+		.tail()
+		.initial()
+		.map(function(line){
+			return line.split(" "); // TODO Use regex instead to avoid silly stuff below
+		}).map(function(tuple){
+			return {
+				commits: $_.first($_.tail(tuple)),
+				loc: $_.last($_.initial(tuple))
+			};
+		}).value();
 
 var template = fs.readFileSync("template.jade", 'utf8');
 var fn = jade.compile(template);
 
-var metrics = [
-	{loc: 1, commits: 2},
-	{loc: 2, commits: 4},
-	{loc: 3, commits: 6},
-	{loc: 4, commits: 8},
-	{loc: 5, commits: 10},
-	{loc: 6, commits: 12},
-	{loc: 7, commits: 14},
-	{loc: 8, commits: 16},
-	{loc: 9, commits: 18},
-	{loc: 10, commits: 20}
-];
-
-// TODO Remove first input line
-// TODO filter out loc === 0 or commits === 0
 // TODO Add graphics/charts
 // TODO Add some tests
 
