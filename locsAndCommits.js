@@ -13,8 +13,8 @@ var metrics =
 			return line.split(" "); // TODO Use regex instead to avoid silly stuff below
 		}).map(function(tuple){
 			return {
-				commits: $_.first($_.tail(tuple)),
-				loc: $_.last($_.initial(tuple))
+				commits: parseInt($_.first($_.tail(tuple))),
+				loc: parseInt($_.last($_.initial(tuple)))
 			};
 		}).value();
 
@@ -84,5 +84,11 @@ var filesPercentAccSum = returnAccumulatedSum(filesPercent)
 
 //console.log(filesPercentAccSum);
 
-var str = fn({metrics: metrics});
+var sortByLocs = $_.sortBy(metrics, "loc");
+var sortByReverseLocs = sortByLocs.reverse();
+var sortByReverseCommits = $_.sortBy(metrics, "commits").reverse();
+
+//sortByReverseCommits.forEach(function(metric){console.log(metric.commits);});
+
+var str = fn({metrics: sortByLocs});
 console.log(str);
