@@ -5,6 +5,12 @@ var jade = require('jade'),
 var data = fs.readFileSync("tmp", 'utf8');
 var lines = data.split("\n");
 
+if (!data)
+    throw {
+        name: "No data found", 
+        message: "Something went wrong... No data in file or file not found."
+    };
+
 var metricsNotSorted =
     $_.chain(lines)
         .tail()
