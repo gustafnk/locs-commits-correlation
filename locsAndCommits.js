@@ -89,8 +89,6 @@ var filesPercentAccSum = returnAccumulatedSum(filesPercent)
 
 //console.log(filesPercentAccSum);
 
-var sortByLocs = $_.sortBy(metrics, "loc");
-
 var reverse = function(a){
     var temp = [];
     var len = a.length;
@@ -100,15 +98,20 @@ var reverse = function(a){
     return temp;
 };
 
+var sortByLocs = $_.sortBy(metrics, "loc");
+var sortByCommits = $_.sortBy(metrics, "commits");
 var sortByReverseLocs = reverse(sortByLocs);
-var sortByReverseCommits = reverse($_.sortBy(metrics, "commits"));
 
 var str = 
     fn_loc({metrics: sortByLocs}) + "\n\n" +
-    fn_commits({metrics: sortByLocs}) + "\n\n" +
+    fn_commits({metrics: sortByCommits}) + "\n\n" +
     fn({metrics: sortByReverseLocs});
 
 var htmlTemplate = fs.readFileSync("vanilla.html", 'utf8');
 var result = htmlTemplate.replace("<!-- placeholder for tables -->", str);
 
 console.log(result);
+
+//sortByReverseLocs.forEach(function(metric){
+//    console.log(metric.locPercentAccSum);  
+//})
