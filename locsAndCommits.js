@@ -43,7 +43,8 @@ var commitSum = sumForProperty("commits");
 
 var writePercentForProperty = function(property, sum){
     metrics.forEach(function(item){ 
-        item[property + "Percent"] = item[property]/sum;
+        var num = item[property]/sum;
+        item[property + "Percent"] = Math.round(num*100)/100;
     });
 };
 writePercentForProperty("loc", locSum);
@@ -53,7 +54,7 @@ var writeAccumulatedSumForProperty = function(list, property){
     var sum = 0;
     list.forEach(function(item){
         sum += item[property]; 
-        item[property + "AccSum"] = sum;
+        item[property + "AccSum"] = Math.round(sum*100)/100;
     });
 };
 
