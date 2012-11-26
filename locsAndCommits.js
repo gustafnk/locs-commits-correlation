@@ -5,7 +5,7 @@ var jade = require('jade'),
 var data = fs.readFileSync("tmp.txt", 'utf8');
 var lines = data.split("\n");
 
-var metrics =
+var metricsNotSorted =
     $_.chain(lines)
         .tail()
         .initial()
@@ -17,6 +17,8 @@ var metrics =
                 loc: parseInt($_.last($_.initial(tuple)))
             };
         }).value();
+
+var metrics = $_.sortBy(metricsNotSorted, "loc");
 
 var template = fs.readFileSync("template.jade", 'utf8');
 var template_loc = fs.readFileSync("template_loc.jade", 'utf8');
@@ -47,16 +49,13 @@ var writePercentForProperty = function(property, sum){
 writePercentForProperty("loc", locSum);
 writePercentForProperty("commits", commitSum);
 
-var writeAccumulatedSumForProperty = function(property){
+var writeAccumulatedSumForProperty = function(list, property){
     var sum = 0;
-    metrics.forEach(function(item){
+    list.forEach(function(item){
         sum += item[property]; 
         item[property + "AccSum"] = sum;
     });
 };
-
-writeAccumulatedSumForProperty("locPercent");
-writeAccumulatedSumForProperty("commitsPercent");
 
 // Print the result matrix
 /*
@@ -98,9 +97,13 @@ var reverse = function(a){
     return temp;
 };
 
-var sortByLocs = $_.sortBy(metrics, "loc");
+var sortByLocs = metrics;
 var sortByCommits = $_.sortBy(metrics, "commits");
 var sortByReverseLocs = reverse(sortByLocs);
+
+writeAccumulatedSumForProperty(sortByReverseLocs, "locPercent");
+writeAccumulatedSumForProperty(sortByReverseLocs, "commitsPercent");
+
 
 var str = 
     fn_loc({metrics: sortByLocs}) + "\n\n" +
@@ -112,6 +115,8 @@ var result = htmlTemplate.replace("<!-- placeholder for tables -->", str);
 
 console.log(result);
 
-//sortByReverseLocs.forEach(function(metric){
-//    console.log(metric.locPercentAccSum);  
-//})
+/*
+sortByLocs.forEach(function(metric){
+    console.log(metric.locPercent + "%, " + metric.locPercentAccSum);  
+})
+*/
