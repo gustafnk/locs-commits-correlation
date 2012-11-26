@@ -1,0 +1,11 @@
+html
+    head
+        link(href='style.css', rel='stylesheet', type='text/css')
+    body
+        h1 Commits
+        table 
+            tr
+                th Commits
+            each item in metrics
+                tr
+                    td(class='commits')= item.commits
