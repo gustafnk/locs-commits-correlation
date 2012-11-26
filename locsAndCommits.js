@@ -111,7 +111,7 @@ var str =
     fn_commits({metrics: sortByCommits}) + "\n\n" +
     fn({metrics: sortByReverseLocs});
 
-var htmlTemplate = fs.readFileSync("vanilla.html", 'utf8');
+var htmlTemplate = fs.readFileSync("result_template.html", 'utf8');
 var result = htmlTemplate.replace("<!-- placeholder for tables -->", str);
 
 console.log(result);
