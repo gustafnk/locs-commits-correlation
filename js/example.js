@@ -5,8 +5,8 @@ $(function(){
             type: 'dot', 
             width: '960px', 
             height: '400px', 
-            parseDirection: 'x', 
-            colFilter: ':eq(0)'
+            parseDirection: 'x',
+            colors: ["#e9e744"]
         };
 
 	$('table.locs').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(0)'}));

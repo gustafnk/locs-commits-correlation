@@ -430,6 +430,9 @@ $.fn.visualize = function(options, container){
 					var linewidth = (xInterval-o.barGroupMargin*2) / dataGroups.length;
 					var points = dataGroups[h].points;
 					var integer = 0;
+					ctx.fillStyle = dataGroups[h].color;
+					ctx.strokeStyle = dataGroups[h].color;
+
 					for(var i=0; i<points.length; i++){
 						var xVal = (integer-o.barGroupMargin)+(h*linewidth)+linewidth/2;
 						xVal += o.barGroupMargin*2;
@@ -438,8 +441,7 @@ $.fn.visualize = function(options, container){
 						ctx.fill();
 						integer+=xInterval;
 					}
-					ctx.fillStyle = dataGroups[h].color;
-					ctx.strokeStyle = dataGroups[h].color;
+					
 					ctx.stroke();
 					ctx.closePath();
 				}
