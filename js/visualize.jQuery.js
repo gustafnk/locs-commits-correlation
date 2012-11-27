@@ -376,6 +376,73 @@ $.fn.visualize = function(options, container){
 					ctx.stroke();
 					ctx.closePath();
 				}
+			},
+
+			dot: function(){
+				
+				canvasContain.addClass('visualize-dot');
+			
+				var radius = 3;
+
+				//write X labels
+				var xInterval = canvas.width() / (xLabels.length);
+				var xlabelsUL = $('<ul class="visualize-labels-x"></ul>')
+					.width(canvas.width())
+					.height(canvas.height())
+					.insertBefore(canvas);
+				$.each(xLabels, function(i){ 
+					var thisLi = $('<li><span class="label">'+this+'</span></li>')
+						.prepend('<span class="line" />')
+						.css('left', xInterval * i)
+						.width(xInterval)
+						.appendTo(xlabelsUL);
+					var label = thisLi.find('span.label');
+					label.addClass('label');
+				});
+
+				//write Y labels
+				var yScale = (canvas.height() - radius) / totalYRange;
+				var liBottom = canvas.height() / (yLabels.length-1);
+				var ylabelsUL = $('<ul class="visualize-labels-y"></ul>')
+					.width(canvas.width())
+					.height(canvas.height())
+					.insertBefore(canvas);
+				$.each(yLabels, function(i){  
+					var thisLi = $('<li><span>'+this+'</span></li>')
+						.prepend('<span class="line"  />')
+						.css('bottom',liBottom*i)
+						.prependTo(ylabelsUL);
+						var label = thisLi.find('span:not(.line)');
+						var topOffset = label.height()/-2;
+						if(i == 0){ topOffset = -label.height(); }
+						else if(i== yLabels.length-1){ topOffset = 0; }
+						label
+							.css('margin-top', topOffset)
+							.addClass('label');
+				});
+
+				//start from the bottom left
+				ctx.translate(0,zeroLoc);
+				//iterate and draw
+				for(var h=0; h<dataGroups.length; h++){
+					ctx.beginPath();
+					
+					var linewidth = (xInterval-o.barGroupMargin*2) / dataGroups.length;
+					var points = dataGroups[h].points;
+					var integer = 0;
+					for(var i=0; i<points.length; i++){
+						var xVal = (integer-o.barGroupMargin)+(h*linewidth)+linewidth/2;
+						xVal += o.barGroupMargin*2;
+
+						ctx.arc(xVal, -points[i]*yScale, radius, 2*Math.PI, false);					
+						ctx.fill();
+						integer+=xInterval;
+					}
+					ctx.fillStyle = dataGroups[h].color;
+					ctx.strokeStyle = dataGroups[h].color;
+					ctx.stroke();
+					ctx.closePath();
+				}
 			}
 		};
 	
