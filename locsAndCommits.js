@@ -1,3 +1,6 @@
+
+// TODO Add some tests
+
 var jade = require('jade'),
     fs = require('fs'),
     $_ = require('underscore');
@@ -34,9 +37,6 @@ var fn = jade.compile(template);
 var fn_loc = jade.compile(template_loc);
 var fn_commits = jade.compile(template_commits);
 
-// TODO Add graphics/charts
-// TODO Add some tests
-
 var sumForProperty = function(property){
     return metrics.map(function(item){
         return item[property];
@@ -50,12 +50,21 @@ var commitSum = sumForProperty("commits");
 var writePercentForProperty = function(property, sum){
     metrics.forEach(function(item){ 
         var num = item[property]/sum;
-        item[property + "Percent"] = Math.round(num*100)/100;
+        item[property + "Percent"] = Math.round(num*10000)/10000;
     });
 };
 writePercentForProperty("loc", locSum);
 writePercentForProperty("commits", commitSum);
 
+var writeRatio = function(property, sum){
+    metrics.forEach(function(item){ 
+        var num = item.loc/item.commits;
+        
+        if (num !== 1) // Bug: too much "1" in data set, strange
+            item["ratio"] = Math.round(num*10000)/10000;
+    });
+};
+writeRatio();
 
 // Print the result matrix
 /*
