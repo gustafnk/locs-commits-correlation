@@ -20,6 +20,8 @@ var metricsNotSorted =
         .initial()
         .map(function(line){
             return line.split(" "); // TODO Use regex instead to avoid silly stuff below
+        }).filter(function(tuple){
+            return $_.last(tuple) !== "0";
         }).map(function(tuple){
             return {
                 commits: parseInt($_.first($_.tail(tuple))),
@@ -60,8 +62,7 @@ var writeRatio = function(property, sum){
     metrics.forEach(function(item){ 
         var num = item.loc/item.commits;
         
-        if (num !== 1) // Bug: too much "1" in data set, strange
-            item["ratio"] = Math.round(num*10000)/10000;
+        item["ratio"] = Math.round(num*10000)/10000;
     });
 };
 writeRatio();
