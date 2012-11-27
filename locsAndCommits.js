@@ -56,13 +56,6 @@ var writePercentForProperty = function(property, sum){
 writePercentForProperty("loc", locSum);
 writePercentForProperty("commits", commitSum);
 
-var writeAccumulatedSumForProperty = function(list, property){
-    var sum = 0;
-    list.forEach(function(item){
-        sum += item[property]; 
-        item[property + "AccSum"] = Math.round(sum*100)/100;
-    });
-};
 
 // Print the result matrix
 /*
@@ -107,6 +100,14 @@ var reverse = function(a){
 var sortByLocs = metrics;
 var sortByCommits = $_.sortBy(metrics, "commits");
 var sortByReverseLocs = reverse(sortByLocs);
+
+var writeAccumulatedSumForProperty = function(list, property){
+    var sum = 0;
+    list.forEach(function(item){
+        sum += item[property]; 
+        item[property + "AccSum"] = Math.round(sum*100)/100;
+    });
+};
 
 writeAccumulatedSumForProperty(sortByReverseLocs, "locPercent");
 writeAccumulatedSumForProperty(sortByReverseLocs, "commitsPercent");
