@@ -51,7 +51,18 @@ function leastSquares(xs, ys) {
         intercept: intercept,
         rSquared: rSquared,
         toString: function(){
-            return "y = k*x + m, where\n\n" + "k = " + slope + "\nm = " + intercept;
+            return "y = k*x + m, where\n\n" + "k = " + this.slope + "\nm = " + this.intercept;
+        },
+        getValidity: function(){
+            var rounded = Math.round(this.rSquared*10)/10;
+            if (rounded >= 0.7)
+                return "valid";
+            else if(0.5 <= rounded && rounded < 0.7) {
+                return "warning";
+            }
+            else {
+                return "invalid";
+            }
         }
     };
 }
@@ -185,4 +196,4 @@ console.log(result);
 
 //console.log("slope: " + result.slope);
 //console.log("intercept: " + result.intercept);
-//console.log("rSquared: " + result.rSquared);
+//console.log("rSquared ok : " + linearRegression.isRSquaredOk());

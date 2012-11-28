@@ -30,3 +30,19 @@ table.linearFunction td pre {
 hr {
     margin-top: 55px;
 }
+
+.rSquared {
+    font-size: 2em;
+}
+
+.valid {
+    color: green;
+}
+
+.warning {
+    color: orange;
+}
+
+.invalid {
+    color: red;
+}
