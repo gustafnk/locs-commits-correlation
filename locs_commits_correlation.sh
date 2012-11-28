@@ -1,3 +1,9 @@
+# Example usage:
+# $ ./locs_commits_correlation.sh ../path/to/repo/root/ "relative/path/to/your/files/*.js"
+
+# With "real parameters"
+# $ ./locs_commits_correlation.sh ../myRepo/ "js/modules/*.js"
+
 bash ./locs_and_commits.sh "$1" "$2" > tmp
 
 DIRECTORY="out"
