@@ -1,5 +1,5 @@
 body {
-    padding: 50px;
+    padding-left: 50px;
 }
 
 h1 {
@@ -16,4 +16,17 @@ td, th {
     border-width: 1px;
     padding: 10px;
     font-family: Courier New;
+}
+
+table.linearFunction td {
+    text-align: left;
+    padding: 35px;
+}
+
+table.linearFunction td pre {
+    font-size: 12px;
+}
+
+hr {
+    margin-top: 55px;
 }
