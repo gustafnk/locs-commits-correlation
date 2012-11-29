@@ -88,6 +88,7 @@ var locs = $_.map(metrics, function(metric){return metric.loc;});
 var commits = $_.map(metrics, function(metric){return metric.commits;});
 
 var linearRegression = leastSquares(locs, commits);
+fs.writeFile("r_squared.tmp", JSON.stringify({r2: linearRegression.rSquared}));
 
 var template = fs.readFileSync("template.jade", 'utf8');
 var template_loc = fs.readFileSync("template_loc.jade", 'utf8');
