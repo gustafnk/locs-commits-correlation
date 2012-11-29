@@ -92,6 +92,15 @@ var commits = $_.map(metrics, function(metric){
     return $_.pick(metric, "commits", "name");
 });
 
+var locsTimesCommits = $_.chain(metrics)
+    .map(function(metric){
+        var tuple = $_.pick(metric, "name", "loc", "commits")
+        tuple.factor = tuple.loc * tuple.commits;
+
+        return tuple;
+    }).sortBy("factor")
+    .value();
+
 var locsOnly = $_.map(locs, function(item){return item.loc})
 var commitsOnly = $_.map(commits, function(item){return item.commits})
 var linearRegression = leastSquares(locsOnly, commitsOnly);
@@ -100,11 +109,13 @@ fs.writeFile("r_squared.tmp", JSON.stringify({r2: linearRegression.rSquared}));
 var template = fs.readFileSync("template.jade", 'utf8');
 var template_loc = fs.readFileSync("template_loc.jade", 'utf8');
 var template_commits = fs.readFileSync("template_commits.jade", 'utf8');
+var template_factor = fs.readFileSync("template_factor.jade", 'utf8');
 var template_rsquared = fs.readFileSync("template_rsquared.jade", 'utf8');
 
 var fn = jade.compile(template);
 var fn_loc = jade.compile(template_loc);
 var fn_commits = jade.compile(template_commits);
+var fn_factor = jade.compile(template_factor);
 var fn_rsquared = jade.compile(template_rsquared)
 
 var sumForProperty = function(property){
@@ -178,6 +189,7 @@ var str =
     fn_rsquared(linearRegression) + "\n\n" +
     fn_loc({metrics: sortByLocs}) + "\n\n" +
     fn_commits({metrics: sortByCommits}) + "\n\n" +
+    fn_factor({metrics: locsTimesCommits}) + "\n\n" +
     fn({metrics: sortByReverseLocs});
 
 var htmlTemplate = fs.readFileSync("result_template.html", 'utf8');

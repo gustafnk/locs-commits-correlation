@@ -1,0 +1,10 @@
+hr
+h1 Locs*commits, sorted on itself
+table(class='factor')
+    tr
+        th Name
+        th Loc*commmits
+    each item in metrics
+        tr
+            td= item.name
+            td= item.factor
