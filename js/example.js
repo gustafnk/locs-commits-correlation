@@ -9,8 +9,8 @@ $(function(){
             colors: ["#e9e744"]
         };
 
-	$('table.locs').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(0)'}));
-    $('table.commits').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(0)'}));
+	$('table.locs').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
+    $('table.commits').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
     
     $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(5)'}));
     

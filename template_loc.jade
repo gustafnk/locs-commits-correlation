@@ -2,7 +2,9 @@ hr
 h1 Locs, sorted on itself
 table(class='locs')
     tr
+        th Name
         th Loc
     each item in metrics
         tr
-            td(class='loc')= item.loc
+            td= item.name
+            td= item.loc

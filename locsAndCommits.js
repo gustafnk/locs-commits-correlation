@@ -77,6 +77,7 @@ var metricsNotSorted =
             return $_.last(tuple) !== "0";
         }).map(function(tuple){
             return {
+                name: $_.first(tuple),
                 commits: parseInt($_.first($_.tail(tuple))),
                 loc: parseInt($_.last($_.initial(tuple)))
             };
@@ -84,10 +85,16 @@ var metricsNotSorted =
 
 var metrics = $_.sortBy(metricsNotSorted, "loc");
 
-var locs = $_.map(metrics, function(metric){return metric.loc;});
-var commits = $_.map(metrics, function(metric){return metric.commits;});
+var locs = $_.map(metrics, function(metric){
+    return $_.pick(metric, "loc", "name");
+});
+var commits = $_.map(metrics, function(metric){
+    return $_.pick(metric, "commits", "name");
+});
 
-var linearRegression = leastSquares(locs, commits);
+var locsOnly = $_.map(locs, function(item){return item.loc})
+var commitsOnly = $_.map(commits, function(item){return item.commits})
+var linearRegression = leastSquares(locsOnly, commitsOnly);
 fs.writeFile("r_squared.tmp", JSON.stringify({r2: linearRegression.rSquared}));
 
 var template = fs.readFileSync("template.jade", 'utf8');

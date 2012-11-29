@@ -2,7 +2,9 @@ hr
 h1 Commits, sorted on itself
 table(class='commits')
     tr
+        th Name
         th Commits
     each item in metrics
         tr
-            td(class='commits')= item.commits
+            td= item.name
+            td= item.commits
