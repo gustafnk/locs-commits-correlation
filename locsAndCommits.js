@@ -127,17 +127,6 @@ var writeRatio = function(property, sum){
 };
 writeRatio();
 
-// Print the result matrix
-/*
-metrics.forEach(function(item){
-    console.log(
-        "LOC: ", item.loc, "; Commits: ", item.commits, 
-        "; LOCPercent: ", item.locPercent, "; LOCPercentAccSum: ", item.locPercentAccSum,
-        "; CommitPercent: ", item.commitsPercent, "; CommitPercentAccSum: ", item.commitsPercentAccSum
-    );
-});
-*/
-
 var filesPercent = metrics.map(function(){
     return 1/metrics.length;
 });
@@ -151,12 +140,6 @@ var returnAccumulatedSum = function(list){
 };
 
 var filesPercentAccSum = returnAccumulatedSum(filesPercent)
-
-//console.log();
-//console.log("LOC sum:", locSum);
-//console.log("Commit sum:", commitSum);
-
-//console.log(filesPercentAccSum);
 
 var reverse = function(a){
     var temp = [];
@@ -193,7 +176,3 @@ var htmlTemplate = fs.readFileSync("result_template.html", 'utf8');
 var result = htmlTemplate.replace("<!-- placeholder for tables -->", str);
 
 console.log(result);
-
-//console.log("slope: " + result.slope);
-//console.log("intercept: " + result.intercept);
-//console.log("rSquared ok : " + linearRegression.isRSquaredOk());
