@@ -31,4 +31,6 @@ if [ ! -d "$output_directory" ]; then
 fi
 
 node locsAndCommits > "$output_directory/$project_name.html"
-rm tmp
+cp "r_squared.tmp" "$output_directory/$project_name.txt"
+rm "tmp"
+rm "r_squared.tmp"
