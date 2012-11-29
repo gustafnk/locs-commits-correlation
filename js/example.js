@@ -17,8 +17,7 @@ $(function(){
     $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(3)'}));
     $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(4)'}));
     $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(2)'}));
-    $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(6)'}));
-
+    
     $('table.locs').hide();
     $('table.commits').hide();
     $('table.full').hide();
