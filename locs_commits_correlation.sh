@@ -1,19 +1,34 @@
+
+#######################
 # Example usage:
 # $ ./locs_commits_correlation.sh ../path/to/repo/root/ "relative/path/to/your/files/*.js"
-
+#
 # With "real parameters"
-# $ ./locs_commits_correlation.sh ../myRepo/ "js/modules/*.js"
+# $ ./locs_commits_correlation.sh ../jenkins/ "*.java": 0.456447887030814 (2m)
+#######################
 
-bash ./locs_and_commits.sh "$1" "$2" > tmp
 
-DIRECTORY="out"
+current_path=$PWD;
+cd "$1"
+project_name=${PWD##*/};
+cd "$current_path"
 
-# name=basename "$1" # TODO Learn more about basename
-# name+=".html"
+echo
+echo " - Gathering metrics for project named '$project_name'..."
+echo
 
-if [ ! -d "$DIRECTORY" ]; then
-    mkdir "$DIRECTORY"
+dataset_directory="datasets"
+if [ ! -d "$dataset_directory" ]; then
+    mkdir "$dataset_directory"
 fi
 
-node locsAndCommits > "$DIRECTORY/result.html"
+bash ./locs_and_commits.sh "$1" "$2" > "$dataset_directory/$project_name"
+cp "$dataset_directory/$project_name" tmp
+
+output_directory="out"
+if [ ! -d "$output_directory" ]; then
+    mkdir "$output_directory"
+fi
+
+node locsAndCommits > "$output_directory/$project_name.html"
 rm tmp
