@@ -21,3 +21,5 @@ R² values
     ./locs_commits_correlation.sh ../django/ "*.py": 0.441 (1m4s)
     ./locs_commits_correlation.sh ../linux/ "*.c": 0.248 (14m52s)
     ./locs_commits_correlation.sh ../mono/ "*.cs": NaN, ouch... (15m56s) 
+
+TODO: Add missing packages.json file.
