@@ -3,6 +3,7 @@ The core reason behind this project is to test the hypothesis that there is a co
 TODO: Write more text here... :)
 
 Example usage:
+
     $ cd ..
     $ git clone https://github.com/jenkinsci/jenkins.git
     $ cd locs-commits-correlation
