@@ -2,6 +2,8 @@ The core reason behind this project is to test the hypothesis that there is a co
 
 The results so far: I have seen a project (not open sourced) that have a R² value of 0.7, which (for some) indicates correlation. However, many of the popular projects here on github have R² values between 0.2 and 0.5, indicating some correlation but not having LOC as the largest influencing factor.
 
+Run "npm install jade" to install dependencies.
+
 Example usage:
 
     $ cd ..
