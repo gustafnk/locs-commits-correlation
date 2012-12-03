@@ -14,9 +14,9 @@ Example usage:
 
 R^2 values
 ---
-    ./locs_commits_correlation.sh ../jenkins/ "*.java": 0.456447887030814 (2m)
-    ./locs_commits_correlation.sh ../rails/ "*.rb": 0.3384583256446627 (2m13s)
-    ./locs_commits_correlation.sh ../linux/ "*.c": 0.2475822925417388 (14m52s)
-    ./locs_commits_correlation.sh ../redis/ "*.c": 0.3402266622296573 (6s)
-    ./locs_commits_correlation.sh ../django/ "*.py": 0.4406735561150325 (1m4s)
+    ./locs_commits_correlation.sh ../jenkins/ "*.java": 0.456 (2m)
+    ./locs_commits_correlation.sh ../rails/ "*.rb": 0.338 (2m13s)
+    ./locs_commits_correlation.sh ../linux/ "*.c": 0.248 (14m52s)
+    ./locs_commits_correlation.sh ../redis/ "*.c": 0.340 (6s)
+    ./locs_commits_correlation.sh ../django/ "*.py": 0.441 (1m4s)
     ./locs_commits_correlation.sh ../mono/ "*.cs": NaN, ouch... (15m56s) 
