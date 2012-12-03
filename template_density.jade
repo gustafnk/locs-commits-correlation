@@ -1,0 +1,10 @@
+hr
+h1 Commit density (commits/LOC), sorted on itself
+table(class='density')
+    tr
+        th Name
+        th Commit density
+    each item in metrics
+        tr
+            td= item.name
+            td= item.density

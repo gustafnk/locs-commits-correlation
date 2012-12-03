@@ -12,6 +12,7 @@ $(function(){
 	$('table.locs').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
     $('table.commits').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
     $('table.factor').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
+    $('table.density').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(1)'}));
     
     $('table.full').visualize($.extend($.extend({}, defaults), { colFilter: ':eq(5)'}));
     
@@ -22,5 +23,6 @@ $(function(){
     $('table.locs').hide();
     $('table.commits').hide();
     $('table.factor').hide();
+    $('table.density').hide();
     $('table.full').hide();
 });

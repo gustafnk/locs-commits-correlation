@@ -101,6 +101,21 @@ var locsTimesCommits = $_.chain(metrics)
     }).sortBy("factor")
     .value();
 
+var commitsPerLoc = $_.chain(metrics)
+    .map(function(metric){
+        var tuple = $_.pick(metric, "name", "loc", "commits")
+        tuple.density = tuple.commits / tuple.loc;
+
+        // TODO Possible bug?
+        if (tuple.density === Infinity)
+            tuple.density = 0;
+
+        return tuple;
+    }).sortBy("density").filter(function(tuple){
+        return tuple.density !== 0;
+    })
+    .value();
+
 var locsOnly = $_.map(locs, function(item){return item.loc})
 var commitsOnly = $_.map(commits, function(item){return item.commits})
 var linearRegression = leastSquares(locsOnly, commitsOnly);
@@ -110,12 +125,14 @@ var template = fs.readFileSync("template.jade", 'utf8');
 var template_loc = fs.readFileSync("template_loc.jade", 'utf8');
 var template_commits = fs.readFileSync("template_commits.jade", 'utf8');
 var template_factor = fs.readFileSync("template_factor.jade", 'utf8');
+var template_density = fs.readFileSync("template_density.jade", 'utf8');
 var template_rsquared = fs.readFileSync("template_rsquared.jade", 'utf8');
 
 var fn = jade.compile(template);
 var fn_loc = jade.compile(template_loc);
 var fn_commits = jade.compile(template_commits);
 var fn_factor = jade.compile(template_factor);
+var fn_density = jade.compile(template_density);
 var fn_rsquared = jade.compile(template_rsquared)
 
 var sumForProperty = function(property){
@@ -190,6 +207,7 @@ var str =
     fn_loc({metrics: sortByLocs}) + "\n\n" +
     fn_commits({metrics: sortByCommits}) + "\n\n" +
     fn_factor({metrics: locsTimesCommits}) + "\n\n" +
+    fn_density({metrics: commitsPerLoc}) + "\n\n" +
     fn({metrics: sortByReverseLocs});
 
 var htmlTemplate = fs.readFileSync("result_template.html", 'utf8');
