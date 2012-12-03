@@ -11,7 +11,7 @@ Example usage:
       [...wait two minutes, lots of warnings appear...]
     $ start out/jenkins.html   # or just open it in an open web browser
 
-Example results are found in the folder example_output/ (clone the repo and one of the file in a browser).
+Example results are found in the folder example_output/ (clone the repo and open one of the file in a browser).
 
 R² values
 ---
