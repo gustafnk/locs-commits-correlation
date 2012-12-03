@@ -11,6 +11,8 @@ Example usage:
       [...wait two minutes, lots of warnings appear...]
     $ start out/jenkins.html   # or just open it in an open web browser
 
+Example results are found in the folder example_output/.
+
 R² values
 ---
     ./locs_commits_correlation.sh ../jenkins/ "*.java": 0.456 (2m)
