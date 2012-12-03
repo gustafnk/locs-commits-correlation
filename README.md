@@ -1,6 +1,6 @@
-The core reason behind this project is to test the hypothesis that there is a correlation between the LOC of a file and the number of commits to that file.
+The core reason behind this project is to test the hypothesis that there is a correlation between the LOC of a file and the number of commits to that file. The method for finding the number of commits for a file could be better, since it's based on file name. Thus, renaming the file resets the number.
 
-TODO: Write more text here... :)
+The results so far: I have seen a project (not open sourced) that have a R² value of 0.7, which (for some) indicates correlation. However, many of the popular projects here on github have R² values between 0.2 and 0.5, indicating some correlation but not having LOC as the largest influencing factor.
 
 Example usage:
 
@@ -11,8 +11,7 @@ Example usage:
       [...wait two minutes, lots of warnings appear...]
     $ start out/jenkins.html   # or just open it in an open web browser
 
-
-R^2 values
+R² values
 ---
     ./locs_commits_correlation.sh ../jenkins/ "*.java": 0.456 (2m)
     ./locs_commits_correlation.sh ../rails/ "*.rb": 0.338 (2m13s)
