@@ -1,0 +1,17 @@
+{
+  "name": "locs-commits-correlation",
+  "description": "Code metrics and visualization project",
+  "version": "0.2.0",
+  "author": {
+    "name": "Gustaf Nilsson Kotte",
+    "email": "gustaf.nk@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gustafnk/locs-commits-correlation"
+  },
+  "dependencies": {
+    "jade": "0.27.6",
+    "underscore": "1.4.2"
+  }
+}
