@@ -2,6 +2,7 @@ hr
 h1 Percent and sums, sorted on Locs
 table(class='full')
     tr
+        th Name
         th Loc
         th Commits
         th LocPercent
@@ -11,6 +12,7 @@ table(class='full')
         // th Ratio
     each item in metrics
         tr
+            td(class='name')= item.name
             td(class='loc')= item.loc
             td(class='commits')= item.commits
             td(class='locPercent')= item.locPercent
