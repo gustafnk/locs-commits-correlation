@@ -78,8 +78,9 @@ end
 
 
 # Gather
-paths = Dir.glob("**/*")
+paths = Dir.glob("**/*.js")
 
+puts "Reading files...."
 code_files = paths.select {|path| !FileTest.directory?(path) }.map do |file_path|
   number_of_commits = `git log --follow -p --pretty=format: --name-only #{file_path} | \
    grep -v '^$' | wc -l`.to_i
@@ -90,15 +91,17 @@ code_files = paths.select {|path| !FileTest.directory?(path) }.map do |file_path
    end
 end.select {|code_file| not code_file.nil? }
 
+puts "Calculating..."
+
 loc_list = code_files.map do |code_file|
   code_file.loc
 end
 
-number_of_commit_list = code_files.map do |code_file|
+number_of_commits_list = code_files.map do |code_file|
   code_file.number_of_commits
 end
 
-statistics = least_squares(loc_list, number_of_commit_list)
+statistics = least_squares(loc_list, number_of_commits_list)
 
 puts "----------------------------"
 puts statistics
