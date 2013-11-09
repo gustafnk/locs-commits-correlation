@@ -1,7 +1,7 @@
 
-files = Dir.glob("**/*")
+paths = Dir.glob("**/*")
 
-files.select {|file| !FileTest.directory?(file) }.each do |file|
+paths.select {|path| !FileTest.directory?(path) }.each do |file|
   number_of_commits = `git log --follow -p --pretty=format: --name-only #{file} | \
    grep -v '^$' | wc -l`.to_i
 
