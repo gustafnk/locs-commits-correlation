@@ -1,6 +1,7 @@
 require 'linefit'
 require_relative 'code_file'
 require_relative 'correlation_status_helper'
+require_relative 'server'
 
 
 def get_commit_history(glob)
@@ -57,4 +58,5 @@ code_files = get_commit_history("**/*.js")
 intercept, slope, r_squared = get_correlation(code_files)
 
 print_correlation(intercept, slope, r_squared)
-
+# code_files, intercept, slope, r_squared = nil
+start_server(code_files, intercept, slope, r_squared)
