@@ -23,7 +23,7 @@ R² values
 ./run.sh repos/sinatra "lib/**/*.rb": 0.81
 ./run.sh repos/jquery/ "**/src/*.js": 0.48
 ./run.sh repos/lime "**/*.go": 0.63
-
+./run.sh repos/nancy "**/*.cs": 0.17
 
 ## Motivation
 
