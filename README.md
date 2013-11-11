@@ -21,13 +21,14 @@ The R² value is also found in the console output.
 R² values
 ---
 ./run.sh repos/sinatra "lib/**/*.rb": 0.81
-./run.sh repos/jquery/ "**/src/*.js": 0.48
+./run.sh repos/padrino/ "**/*.rb": 0.52
 ./run.sh repos/lime "**/*.go": 0.63
+./run.sh repos/jquery/ "**/src/*.js": 0.48
 ./run.sh repos/nancy "**/*.cs": 0.17
 
 ## Motivation
 
-I want to know whether the correlation hypothesis between lines of code and number of commits it correct.
+I want to know whether the correlation hypothesis between lines of code and number of commits is correct.
 
 
 ## Installation
