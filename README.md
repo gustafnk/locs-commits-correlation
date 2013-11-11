@@ -41,7 +41,7 @@ I want to know whether the correlation hypothesis between lines of code and numb
 
 ## Contributors/contact
 
-Put an issue/question on this repo or contact me at (@gustaf_nk)[https://twitter.com/gustaf_nk]
+Put an issue/question on this repo or contact me at [@gustaf_nk](https://twitter.com/gustaf_nk)
 
 ## License
 
