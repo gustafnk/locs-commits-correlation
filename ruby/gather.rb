@@ -12,9 +12,13 @@ def get_commit_history(glob)
   puts paths
 
   puts
-  puts "Reading commit history.... (This will take a while, grab a cup of cofffe)"
+  puts "Reading commit history.... (This will take a while, grab a cup of coffee)"
 
-  code_files = paths.select {|path| !FileTest.directory?(path) }.map do |file_path|
+  files = paths.select {|path| !FileTest.directory?(path) }
+
+  count = files.length
+  code_files = files.map.with_index do |file_path, index|
+    puts "File number #{index+1} of #{count}"
     number_of_commits = `git log --follow -p --pretty=format: --name-only #{file_path} | \
    grep -v '^$' | wc -l`.to_i
 
@@ -44,7 +48,7 @@ def get_correlation(code_files)
   intercept, slope = lineFit.coefficients
   r_squared = lineFit.rSquared
 
-  [intercept, slope, r_squared]
+  [intercept.round(2), slope.round(2), r_squared.round(2)]
 end
 
 
