@@ -18,13 +18,17 @@ in a web browser.
 
 The R² value is also found in the console output.
 
+There is a possibility for you to test your "glob" with test_glob.sh:
+
+    $ ./test_glob.sh repos/sinatra "lib/**/*.rb"
+
 R² values
 ---
-./run.sh repos/sinatra "lib/**/*.rb": 0.81
-./run.sh repos/padrino/ "**/*.rb": 0.52
-./run.sh repos/lime "**/*.go": 0.63
-./run.sh repos/jquery/ "**/src/*.js": 0.48
-./run.sh repos/nancy "**/*.cs": 0.17
+    ./run.sh repos/sinatra "lib/**/*.rb": 0.81
+    ./run.sh repos/padrino/ "**/*.rb": 0.52
+    ./run.sh repos/lime "**/*.go": 0.63
+    ./run.sh repos/jquery/ "**/src/*.js": 0.48
+    ./run.sh repos/nancy "**/*.cs": 0.17
 
 ## Motivation
 
