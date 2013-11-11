@@ -40,7 +40,7 @@ def start_server(code_files, slope, intersect, r_squared)
         code_files: files,
         property: resource.property,
         property_name: resource.property_name
-      }.merge(statistics_hash)
+      }.merge(statistics_hash).merge({resources: resources })
     end
 
     get resource.path.sub(/(\/)+$/,'') + '/json' do
