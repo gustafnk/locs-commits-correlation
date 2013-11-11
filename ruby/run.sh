@@ -1,3 +1,3 @@
-cd repos/example
-ruby ../../gather.rb
+cd $1
+ruby ../../gather.rb "$@"
 cd ../..

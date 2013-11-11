@@ -7,7 +7,13 @@ require_relative 'server'
 def get_commit_history(glob)
   paths = Dir.glob(glob)
 
-  puts "Reading commit history...."
+  puts
+  puts "Found files:"
+  puts paths
+
+  puts
+  puts "Reading commit history.... (This will take a while, grab a cup of cofffe)"
+
   code_files = paths.select {|path| !FileTest.directory?(path) }.map do |file_path|
     number_of_commits = `git log --follow -p --pretty=format: --name-only #{file_path} | \
    grep -v '^$' | wc -l`.to_i
@@ -53,8 +59,8 @@ def print_correlation(intercept, slope, r_squared)
   puts "----------------------------"
 end
 
-
-code_files = get_commit_history("**/*.js")
+glob = ARGV[1] # TODO Error handling
+code_files = get_commit_history(glob)
 intercept, slope, r_squared = get_correlation(code_files)
 
 print_correlation(intercept, slope, r_squared)
