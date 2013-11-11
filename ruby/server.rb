@@ -2,44 +2,50 @@ require 'sinatra'
 require 'json'
 require_relative 'correlation_status_helper'
 
+class Resource
+  attr_reader :path, :property, :property_name
+
+  def initialize(path, property, property_name)
+    @path = path
+    @property = property
+    @property_name = property_name
+  end
+end
+
+
 def start_server(code_files, slope, intersect, r_squared)
-  
+
   locs_sorted = code_files.sort_by { |item| item.loc }
   number_of_commits_sorted = code_files.sort_by { |item| item.number_of_commits }
 
   statistics_hash = {
-      slope: slope,
-      intersect: intersect,
-      r_squared: r_squared,
-      correlation_status: get_correlation_status(r_squared) 
+    slope: slope,
+    intersect: intersect,
+    r_squared: r_squared,
+    correlation_status: get_correlation_status(r_squared) 
   }
 
-  get '/' do
-    erb :index, locals: {
-      code_files: locs_sorted.last(20), 
-      property: :loc,
-      property_name: 'Lines of code'
-    }.merge(statistics_hash)
-  end
-  
-  get '/json' do
-    content_type :json
+  resources = [
+    Resource.new('/', :loc, 'Lines of code'),
+    Resource.new('/commits', :number_of_commits, 'Number of commits'),
+  ]
 
-    locs_sorted.map(&:loc).to_json
-  end
-  
-  get '/commits' do
-    erb :index, locals: {
-      code_files: number_of_commits_sorted.last(20), 
-      property: :number_of_commits,
-      property_name: 'Number of commits'
-    }.merge(statistics_hash)
-  end
-  
-  get '/commits/json' do
-    content_type :json
+  resources.each do |resource|
+    files = code_files.sort_by { |item| item.send(resource.property)}.last(20)
 
-    number_of_commits_sorted.map(&:number_of_commits).to_json
+    get resource.path do
+      erb :index, locals: {
+        code_files: files,
+        property: resource.property,
+        property_name: resource.property_name
+      }.merge(statistics_hash)
+    end
+
+    get resource.path.sub(/(\/)+$/,'') + '/json' do
+      content_type :json
+
+      files.to_json
+    end
   end
 
   enable :run
