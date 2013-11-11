@@ -28,6 +28,8 @@ def start_server(code_files, slope, intersect, r_squared)
   resources = [
     Resource.new('/', :loc, 'Lines of code'),
     Resource.new('/commits', :number_of_commits, 'Number of commits'),
+    Resource.new('/commits_per_loc', :commits_per_loc, 'Commits per loc'),
+    Resource.new('/loc_per_commits', :loc_per_commits, 'Loc per commits'),
   ]
 
   resources.each do |resource|
@@ -44,7 +46,7 @@ def start_server(code_files, slope, intersect, r_squared)
     get resource.path.sub(/(\/)+$/,'') + '/json' do
       content_type :json
 
-      files.to_json
+      files.map {|item| item.send(resource.property) }.to_json
     end
   end
 
