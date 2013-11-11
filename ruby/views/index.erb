@@ -6,6 +6,7 @@
     <script src="js/vendor/g.raphael-min.js" type="text/javascript"></script>
     <script src="js/vendor/g.line-min.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css" media="screen" />
   </head>
   <body>
     <h1>Locs/commit correlation</h1>
@@ -29,17 +30,19 @@
     <% end %>
     <h2><%= property_name %></h2>
 
-    <div id="graph" style="height: 480px"></div>
-    <h2>Top 20 files</h2>
-    <table>
-      <tr><th>Path</th><th><%= property_name %></th></tr>
-      <% code_files.reverse.each do |code_file| %>
-        <tr>
-          <td><%= code_file.path %></td>
-          <td><%= code_file.send(property) %></td>
-        </tr>
-      <% end %>
-    </table>
-    
+    <div id="graph">&nbsp;</div>
+    <div class="files">
+      <h2>Top 20 files</h2>
+      <table>
+        <tr><th>Path</th><th><%= property_name %></th></tr>
+        <% code_files.reverse.each do |code_file| %>
+          <tr>
+            <td><%= code_file.path %></td>
+            <td><%= code_file.send(property) %></td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+
   </body>
 </html>
